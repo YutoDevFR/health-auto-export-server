@@ -20,12 +20,12 @@ import { filterFields, parseDate } from '../utils';
 export const getAvailableMetrics = async (_req: Request, res: Response) => {
   try {
     const db = HeartRateModel.db;
-    const collections = await db.listCollections().toArray();
+    const collections = await db.listCollections();
 
     // Filter out system collections and map to metric names
     const metrics = collections
-      .map((col: { name: string }) => col.name)
-      .filter((name: string) => !name.startsWith('system.'))
+      .map((col) => col.name)
+      .filter((name) => !name.startsWith('system.'))
       .sort();
 
     res.json({ metrics });
