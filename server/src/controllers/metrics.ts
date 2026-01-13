@@ -17,9 +17,28 @@ import {
 import { MetricName } from '../models/MetricName';
 import { filterFields, parseDate } from '../utils';
 
+export const getSources = async (_req: Request, res: Response) => {
+  try {
+    // Execute all queries in parallel for better performance
+    const [heartRateSources, sleepSources, bpSources] = await Promise.all([
+      HeartRateModel.distinct('source'),
+      SleepModel.distinct('source'),
+      BloodPressureModel.distinct('source'),
+    ]);
+
+    // Combine and deduplicate
+    const allSources = [...new Set([...heartRateSources, ...sleepSources, ...bpSources])].sort();
+
+    res.json({ sources: allSources });
+  } catch (error) {
+    console.error('Error getting sources:', error);
+    res.status(500).json({ error: error instanceof Error ? error.message : 'Error getting sources' });
+  }
+};
+
 export const getMetrics = async (req: Request, res: Response) => {
   try {
-    const { from, to, include, exclude } = req.query;
+    const { from, to, include, exclude, source } = req.query;
     const selectedMetric = req.params.selected_metric as MetricName;
 
     if (!selectedMetric) {
@@ -29,15 +48,26 @@ export const getMetrics = async (req: Request, res: Response) => {
     const fromDate = parseDate(from as string);
     const toDate = parseDate(to as string);
 
-    let query = {};
+    let query: Record<string, unknown> = {};
 
     if (fromDate && toDate) {
-      query = {
-        date: {
-          $gte: fromDate,
-          $lte: toDate,
-        },
+      query.date = {
+        $gte: fromDate,
+        $lte: toDate,
       };
+    }
+
+    // Filter by source/device name (supports multiple sources with comma separation)
+    if (source && source !== '$__all' && source !== 'All') {
+      const sources = (source as string)
+        .split(',')
+        .map(s => s.trim())
+        .filter(s => s && s !== '$__all');
+
+      if (sources.length > 0) {
+        // Use exact match with $in for better index usage and security
+        query.source = sources.length === 1 ? sources[0] : { $in: sources };
+      }
     }
 
     let metrics;
@@ -58,14 +88,13 @@ export const getMetrics = async (req: Request, res: Response) => {
 
     // Process include/exclude filters if provided
     if (include || exclude) {
-      metrics = metrics.map(metric => filterFields(metric, include, exclude));
+      metrics = metrics.map((metric: Record<string, unknown>) => filterFields(metric, include, exclude));
     }
 
-    console.log(metrics);
     res.json(metrics);
   } catch (error) {
     console.error('Error getting metrics:', error);
-    res.json({ error: error instanceof Error ? error.message : 'Error getting metrics' });
+    res.status(500).json({ error: error instanceof Error ? error.message : 'Error getting metrics' });
   }
 };
 
