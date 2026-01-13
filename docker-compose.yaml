@@ -20,8 +20,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./grafana-data:/var/lib/grafana
-    # user: "0:0" # you may need to uncomment this line if using Ubuntu or if you expereince permission errors
+      - grafana-data:/var/lib/grafana
+    user: "0:0" # needed for permission issues on Coolify/Ubuntu
     restart: unless-stopped
     networks:
       - hae_network
