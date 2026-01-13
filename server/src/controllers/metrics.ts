@@ -24,8 +24,8 @@ export const getAvailableMetrics = async (_req: Request, res: Response) => {
 
     // Filter out system collections and map to metric names
     const metrics = collections
-      .map(col => col.name)
-      .filter(name => !name.startsWith('system.'))
+      .map((col: { name: string }) => col.name)
+      .filter((name: string) => !name.startsWith('system.'))
       .sort();
 
     res.json({ metrics });
