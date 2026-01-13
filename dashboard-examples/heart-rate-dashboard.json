@@ -882,7 +882,8 @@
             "root_selector": "sources",
             "source": "url",
             "type": "json",
-            "url": "/api/metrics/sources"
+            "url": "/api/metrics/sources",
+            "url_options": { "data": "", "method": "GET" }
           },
           "queryType": "infinity"
         },

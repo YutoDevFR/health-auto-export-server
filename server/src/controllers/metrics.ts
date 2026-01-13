@@ -17,6 +17,24 @@ import {
 import { MetricName } from '../models/MetricName';
 import { filterFields, parseDate } from '../utils';
 
+export const getAvailableMetrics = async (_req: Request, res: Response) => {
+  try {
+    const db = HeartRateModel.db;
+    const collections = await db.listCollections().toArray();
+
+    // Filter out system collections and map to metric names
+    const metrics = collections
+      .map(col => col.name)
+      .filter(name => !name.startsWith('system.'))
+      .sort();
+
+    res.json({ metrics });
+  } catch (error) {
+    console.error('Error getting available metrics:', error);
+    res.status(500).json({ error: error instanceof Error ? error.message : 'Error getting metrics' });
+  }
+};
+
 export const getSources = async (_req: Request, res: Response) => {
   try {
     // Execute all queries in parallel for better performance
