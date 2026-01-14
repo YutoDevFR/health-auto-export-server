@@ -310,6 +310,9 @@
       },
       "gridPos": { "h": 10, "w": 24, "x": 0, "y": 6 },
       "id": 5,
+      "repeat": "metric",
+      "repeatDirection": "v",
+      "maxPerRow": 1,
       "options": {
         "legend": {
           "calcs": ["mean", "min", "max", "lastNotNull"],
@@ -1094,9 +1097,9 @@
         },
         "definition": "",
         "description": "Type de metrique a afficher",
-        "includeAll": false,
+        "includeAll": true,
         "label": "Metrique",
-        "multi": false,
+        "multi": true,
         "name": "metric",
         "options": [],
         "query": {
