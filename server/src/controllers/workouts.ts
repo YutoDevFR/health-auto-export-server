@@ -17,7 +17,8 @@ export const getWorkoutTypes = async (_req: Request, res: Response) => {
 
 export const getWorkoutSources = async (_req: Request, res: Response) => {
   try {
-    const sources = await WorkoutModel.distinct('activeEnergyBurned.source');
+    // Source is in heartRateData array, not in activeEnergyBurned
+    const sources = await WorkoutModel.distinct('heartRateData.source');
     res.json({ sources: sources.filter(Boolean).sort() });
   } catch (error) {
     console.error('Error getting workout sources:', error);
@@ -51,11 +52,11 @@ export const getWorkouts = async (req: Request, res: Response) => {
       }
     }
 
-    // Filter by source/device
+    // Filter by source/device (source is in heartRateData array)
     if (source && source !== '$__all' && source !== 'All') {
       const sources = (source as string).split(',').map(s => s.trim()).filter(s => s && s !== '$__all');
       if (sources.length > 0) {
-        query['activeEnergyBurned.source'] = sources.length === 1 ? sources[0] : { $in: sources };
+        query['heartRateData.source'] = sources.length === 1 ? sources[0] : { $in: sources };
       }
     }
 
