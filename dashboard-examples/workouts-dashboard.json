@@ -83,7 +83,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -133,7 +133,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -183,7 +183,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -233,7 +233,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -279,7 +279,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -336,7 +336,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -393,7 +393,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -471,7 +471,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -538,7 +538,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -615,7 +615,7 @@
           "root_selector": "",
           "source": "url",
           "type": "json",
-          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}",
+          "url": "/api/workouts?startDate=${__from}&endDate=${__to}&type=${type:csv}&source=${source:csv}",
           "url_options": { "data": "", "method": "GET" }
         }
       ],
@@ -629,6 +629,37 @@
   "tags": ["health", "workouts", "fitness"],
   "templating": {
     "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "${DS_INFINITY}"
+        },
+        "definition": "",
+        "description": "Filtrer par appareil/personne",
+        "includeAll": true,
+        "label": "Appareil",
+        "multi": true,
+        "name": "source",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "sources",
+            "source": "url",
+            "type": "json",
+            "url": "/api/workouts/sources",
+            "url_options": { "data": "", "method": "GET" }
+          },
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
       {
         "current": {},
         "datasource": {

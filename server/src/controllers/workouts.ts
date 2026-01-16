@@ -15,9 +15,19 @@ export const getWorkoutTypes = async (_req: Request, res: Response) => {
   }
 };
 
+export const getWorkoutSources = async (_req: Request, res: Response) => {
+  try {
+    const sources = await WorkoutModel.distinct('activeEnergyBurned.source');
+    res.json({ sources: sources.filter(Boolean).sort() });
+  } catch (error) {
+    console.error('Error getting workout sources:', error);
+    res.status(500).json({ error: 'Error getting workout sources' });
+  }
+};
+
 export const getWorkouts = async (req: Request, res: Response) => {
   try {
-    const { startDate, endDate, include, exclude, type } = req.query;
+    const { startDate, endDate, include, exclude, type, source } = req.query;
 
     const fromDate = parseDate(startDate as string);
     const toDate = parseDate(endDate as string);
@@ -38,6 +48,14 @@ export const getWorkouts = async (req: Request, res: Response) => {
       const types = (type as string).split(',').map(t => t.trim()).filter(t => t && t !== '$__all');
       if (types.length > 0) {
         query.name = types.length === 1 ? types[0] : { $in: types };
+      }
+    }
+
+    // Filter by source/device
+    if (source && source !== '$__all' && source !== 'All') {
+      const sources = (source as string).split(',').map(s => s.trim()).filter(s => s && s !== '$__all');
+      if (sources.length > 0) {
+        query['activeEnergyBurned.source'] = sources.length === 1 ? sources[0] : { $in: sources };
       }
     }
 
