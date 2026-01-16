@@ -1,10 +1,10 @@
 import express from 'express';
 
-import { getWorkouts, getWorkout, saveWorkouts } from '../controllers/workouts';
+import { getWorkouts, getWorkout, getWorkoutTypes } from '../controllers/workouts';
 
 const router = express.Router();
 
-router.post('/', saveWorkouts);
+router.get('/types', getWorkoutTypes);
 router.get('/', getWorkouts);
 router.get('/:id', getWorkout);
 router.get('/health', (req, res) => {

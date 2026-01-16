@@ -5,24 +5,40 @@ import { IngestResponse } from '../models/IngestResponse';
 import { RouteModel, WorkoutModel, mapWorkoutData, mapRoute } from '../models/Workout';
 import { filterFields, parseDate } from '../utils';
 
+export const getWorkoutTypes = async (_req: Request, res: Response) => {
+  try {
+    const types = await WorkoutModel.distinct('name');
+    res.json({ types: types.sort() });
+  } catch (error) {
+    console.error('Error getting workout types:', error);
+    res.status(500).json({ error: 'Error getting workout types' });
+  }
+};
+
 export const getWorkouts = async (req: Request, res: Response) => {
   try {
-    const { startDate, endDate, include, exclude } = req.query;
+    const { startDate, endDate, include, exclude, type } = req.query;
 
     const fromDate = parseDate(startDate as string);
     const toDate = parseDate(endDate as string);
 
     console.log(fromDate, toDate);
 
-    let query = {};
+    const query: Record<string, unknown> = {};
 
     if (fromDate && toDate) {
-      query = {
-        start: {
-          $gte: fromDate,
-          $lte: toDate,
-        },
+      query.start = {
+        $gte: fromDate,
+        $lte: toDate,
       };
+    }
+
+    // Filter by workout type
+    if (type && type !== '$__all' && type !== 'All') {
+      const types = (type as string).split(',').map(t => t.trim()).filter(t => t && t !== '$__all');
+      if (types.length > 0) {
+        query.name = types.length === 1 ? types[0] : { $in: types };
+      }
     }
 
     const workouts = await WorkoutModel.find(query)
