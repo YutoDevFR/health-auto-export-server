@@ -37,15 +37,28 @@ export const getAvailableMetrics = async (_req: Request, res: Response) => {
 
 export const getSources = async (_req: Request, res: Response) => {
   try {
-    // Execute all queries in parallel for better performance
-    const [heartRateSources, sleepSources, bpSources] = await Promise.all([
-      HeartRateModel.distinct('source'),
-      SleepModel.distinct('source'),
-      BloodPressureModel.distinct('source'),
-    ]);
+    const db = HeartRateModel.db;
+    const collections = await db.listCollections();
 
-    // Combine and deduplicate
-    const allSources = [...new Set([...heartRateSources, ...sleepSources, ...bpSources])].sort();
+    // Filter out system collections and non-metric collections
+    const metricCollections = collections
+      .map((col) => col.name)
+      .filter((name) => !name.startsWith('system.') && name !== 'workout_routes' && name !== 'workouts');
+
+    // Get distinct sources from all metric collections in parallel
+    const sourcePromises = metricCollections.map(async (collectionName) => {
+      try {
+        const collection = db.collection(collectionName);
+        return await collection.distinct('source');
+      } catch {
+        return [];
+      }
+    });
+
+    const allSourceArrays = await Promise.all(sourcePromises);
+
+    // Combine and deduplicate all sources
+    const allSources = [...new Set(allSourceArrays.flat().filter(Boolean))].sort();
 
     res.json({ sources: allSources });
   } catch (error) {
