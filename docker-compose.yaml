@@ -27,6 +27,9 @@ services:
       - hae_network
     depends_on:
       - hae-mongo
+    environment:
+      - GF_SERVER_ROOT_URL=${GRAFANA_ROOT_URL}
+      - GF_SERVER_SERVE_FROM_SUB_PATH=false
 
   hae-server:
     container_name: hae-server

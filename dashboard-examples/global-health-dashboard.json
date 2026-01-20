@@ -38,395 +38,17 @@
       "id": 100,
       "options": {
         "code": { "language": "plaintext", "showLineNumbers": false },
-        "content": "# Health Dashboard\nSelectionnez un appareil et une metrique pour visualiser vos donnees de sante.",
+        "content": "# Health Dashboard\nTableau de bord complet de vos donnees de sante. Selectionnez un appareil pour filtrer les donnees.",
         "mode": "markdown"
       },
       "type": "text"
     },
     {
-      "datasource": {
-        "type": "yesoreyeram-infinity-datasource",
-        "uid": "${DS_INFINITY}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": { "mode": "thresholds" },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              { "color": "green", "value": null }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 2 },
-      "id": 1,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": true,
-        "textMode": "auto"
-      },
-      "targets": [
-        {
-          "columns": [
-            { "selector": "date", "text": "Date", "type": "timestamp" },
-            { "selector": "qty", "text": "Value", "type": "number" }
-          ],
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "filters": [],
-          "format": "table",
-          "refId": "A",
-          "root_selector": "",
-          "source": "url",
-          "type": "json",
-          "url": "/api/metrics/${metric}?from=${__from}&to=${__to}&source=${source:csv}",
-          "url_options": { "data": "", "method": "GET" }
-        }
-      ],
-      "title": "Derniere valeur",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "yesoreyeram-infinity-datasource",
-        "uid": "${DS_INFINITY}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": { "mode": "thresholds" },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              { "color": "blue", "value": null }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 2 },
-      "id": 2,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["mean"],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "targets": [
-        {
-          "columns": [
-            { "selector": "date", "text": "Date", "type": "timestamp" },
-            { "selector": "qty", "text": "Value", "type": "number" }
-          ],
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "filters": [],
-          "format": "table",
-          "refId": "A",
-          "root_selector": "",
-          "source": "url",
-          "type": "json",
-          "url": "/api/metrics/${metric}?from=${__from}&to=${__to}&source=${source:csv}",
-          "url_options": { "data": "", "method": "GET" }
-        }
-      ],
-      "title": "Moyenne",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "yesoreyeram-infinity-datasource",
-        "uid": "${DS_INFINITY}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": { "mode": "thresholds" },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              { "color": "orange", "value": null }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 2 },
-      "id": 3,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["min"],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "targets": [
-        {
-          "columns": [
-            { "selector": "date", "text": "Date", "type": "timestamp" },
-            { "selector": "qty", "text": "Value", "type": "number" }
-          ],
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "filters": [],
-          "format": "table",
-          "refId": "A",
-          "root_selector": "",
-          "source": "url",
-          "type": "json",
-          "url": "/api/metrics/${metric}?from=${__from}&to=${__to}&source=${source:csv}",
-          "url_options": { "data": "", "method": "GET" }
-        }
-      ],
-      "title": "Minimum",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "yesoreyeram-infinity-datasource",
-        "uid": "${DS_INFINITY}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": { "mode": "thresholds" },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              { "color": "red", "value": null }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 2 },
-      "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["max"],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "targets": [
-        {
-          "columns": [
-            { "selector": "date", "text": "Date", "type": "timestamp" },
-            { "selector": "qty", "text": "Value", "type": "number" }
-          ],
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "filters": [],
-          "format": "table",
-          "refId": "A",
-          "root_selector": "",
-          "source": "url",
-          "type": "json",
-          "url": "/api/metrics/${metric}?from=${__from}&to=${__to}&source=${source:csv}",
-          "url_options": { "data": "", "method": "GET" }
-        }
-      ],
-      "title": "Maximum",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "yesoreyeram-infinity-datasource",
-        "uid": "${DS_INFINITY}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": { "mode": "palette-classic" },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 15,
-            "gradientMode": "opacity",
-            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-            "insertNulls": false,
-            "lineInterpolation": "smooth",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": { "type": "linear" },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": { "group": "A", "mode": "none" },
-            "thresholdsStyle": { "mode": "off" }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              { "color": "green", "value": null }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 6 },
-      "id": 5,
-      "repeat": "metric",
-      "repeatDirection": "v",
-      "maxPerRow": 1,
-      "options": {
-        "legend": {
-          "calcs": ["mean", "min", "max", "lastNotNull"],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "desc" }
-      },
-      "targets": [
-        {
-          "columns": [
-            { "selector": "date", "text": "Date", "type": "timestamp" },
-            { "selector": "qty", "text": "${metric}", "type": "number" },
-            { "selector": "source", "text": "Source", "type": "string" }
-          ],
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "filters": [],
-          "format": "table",
-          "refId": "A",
-          "root_selector": "",
-          "source": "url",
-          "type": "json",
-          "url": "/api/metrics/${metric}?from=${__from}&to=${__to}&source=${source:csv}",
-          "url_options": { "data": "", "method": "GET" }
-        }
-      ],
-      "title": "${metric} - Evolution",
-      "transformations": [
-        {
-          "id": "partitionByValues",
-          "options": { "fields": ["Source"], "keepFields": false }
-        }
-      ],
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "yesoreyeram-infinity-datasource",
-        "uid": "${DS_INFINITY}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": { "mode": "thresholds" },
-          "custom": {
-            "align": "auto",
-            "cellOptions": { "type": "auto" },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              { "color": "green", "value": null }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": { "id": "byName", "options": "date" },
-            "properties": [
-              { "id": "custom.width", "value": 200 }
-            ]
-          }
-        ]
-      },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 16 },
-      "id": 6,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": true,
-          "fields": "",
-          "reducer": ["sum"],
-          "show": false
-        },
-        "showHeader": true,
-        "sortBy": [{ "desc": true, "displayName": "date" }]
-      },
-      "targets": [
-        {
-          "columns": [
-            { "selector": "date", "text": "Date", "type": "timestamp" },
-            { "selector": "qty", "text": "Valeur", "type": "number" },
-            { "selector": "units", "text": "Unite", "type": "string" },
-            { "selector": "source", "text": "Appareil", "type": "string" }
-          ],
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "filters": [],
-          "format": "table",
-          "refId": "A",
-          "root_selector": "",
-          "source": "url",
-          "type": "json",
-          "url": "/api/metrics/${metric}?from=${__from}&to=${__to}&source=${source:csv}",
-          "url_options": { "data": "", "method": "GET" }
-        }
-      ],
-      "title": "Donnees brutes - ${metric}",
-      "type": "table"
-    },
-    {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 24 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 2 },
       "id": 50,
       "panels": [],
-      "title": "Frequence Cardiaque (Heart Rate)",
+      "title": "Frequence Cardiaque",
       "type": "row"
     },
     {
@@ -480,7 +102,7 @@
           }
         ]
       },
-      "gridPos": { "h": 8, "w": 16, "x": 0, "y": 25 },
+      "gridPos": { "h": 8, "w": 16, "x": 0, "y": 3 },
       "id": 51,
       "options": {
         "legend": {
@@ -539,7 +161,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 25 },
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 3 },
       "id": 52,
       "options": {
         "colorMode": "value",
@@ -598,7 +220,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 25 },
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 3 },
       "id": 53,
       "options": {
         "minVizHeight": 75,
@@ -653,7 +275,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 29 },
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 7 },
       "id": 54,
       "options": {
         "colorMode": "value",
@@ -704,7 +326,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 29 },
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 7 },
       "id": 55,
       "options": {
         "colorMode": "value",
@@ -739,195 +361,324 @@
       "type": "stat"
     },
     {
-      "collapsed": true,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 33 },
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 11 },
       "id": 60,
-      "panels": [
-        {
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": { "fixedColor": "blue", "mode": "shades" },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisPlacement": "auto",
-                "fillOpacity": 80,
-                "gradientMode": "hue",
-                "hideFrom": { "legend": false, "tooltip": false, "viz": false },
-                "lineWidth": 1,
-                "scaleDistribution": { "type": "linear" },
-                "thresholdsStyle": { "mode": "off" }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [{ "color": "green", "value": null }]
-              },
-              "unit": "h"
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 8, "w": 16, "x": 0, "y": 34 },
-          "id": 61,
-          "options": {
-            "barRadius": 0.1,
-            "barWidth": 0.8,
-            "fullHighlight": false,
-            "groupWidth": 0.7,
-            "legend": { "calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true },
-            "orientation": "auto",
-            "showValue": "auto",
-            "stacking": "normal",
-            "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" },
-            "xTickLabelRotation": 0
-          },
-          "targets": [
-            {
-              "columns": [
-                { "selector": "date", "text": "Date", "type": "timestamp" },
-                { "selector": "awake", "text": "Eveille", "type": "number" },
-                { "selector": "core", "text": "Leger", "type": "number" },
-                { "selector": "rem", "text": "REM", "type": "number" },
-                { "selector": "deep", "text": "Profond", "type": "number" }
-              ],
-              "datasource": {
-                "type": "yesoreyeram-infinity-datasource",
-                "uid": "${DS_INFINITY}"
-              },
-              "filters": [],
-              "format": "table",
-              "refId": "A",
-              "root_selector": "",
-              "source": "url",
-              "type": "json",
-              "url": "/api/metrics/sleep_analysis?from=${__from}&to=${__to}&source=${source:csv}",
-              "url_options": { "data": "", "method": "GET" }
-            }
-          ],
-          "title": "Analyse du Sommeil",
-          "type": "barchart"
-        },
-        {
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": { "mode": "thresholds" },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  { "color": "red", "value": null },
-                  { "color": "yellow", "value": 6 },
-                  { "color": "green", "value": 7 }
-                ]
-              },
-              "unit": "h"
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 4, "w": 4, "x": 16, "y": 34 },
-          "id": 62,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
-            "showPercentChange": false,
-            "textMode": "auto"
-          },
-          "targets": [
-            {
-              "columns": [
-                { "selector": "date", "text": "Date", "type": "timestamp" },
-                { "selector": "inBed", "text": "Total", "type": "number" }
-              ],
-              "datasource": {
-                "type": "yesoreyeram-infinity-datasource",
-                "uid": "${DS_INFINITY}"
-              },
-              "filters": [],
-              "format": "table",
-              "refId": "A",
-              "root_selector": "",
-              "source": "url",
-              "type": "json",
-              "url": "/api/metrics/sleep_analysis?from=${__from}&to=${__to}&source=${source:csv}",
-              "url_options": { "data": "", "method": "GET" }
-            }
-          ],
-          "title": "Temps au lit",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "yesoreyeram-infinity-datasource",
-            "uid": "${DS_INFINITY}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": { "mode": "thresholds" },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  { "color": "red", "value": null },
-                  { "color": "green", "value": 1 }
-                ]
-              },
-              "unit": "h"
-            },
-            "overrides": []
-          },
-          "gridPos": { "h": 4, "w": 4, "x": 20, "y": 34 },
-          "id": 63,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": { "calcs": ["lastNotNull"], "fields": "/^Profond$/", "values": false },
-            "showPercentChange": false,
-            "textMode": "auto"
-          },
-          "targets": [
-            {
-              "columns": [
-                { "selector": "date", "text": "Date", "type": "timestamp" },
-                { "selector": "deep", "text": "Profond", "type": "number" }
-              ],
-              "datasource": {
-                "type": "yesoreyeram-infinity-datasource",
-                "uid": "${DS_INFINITY}"
-              },
-              "filters": [],
-              "format": "table",
-              "refId": "A",
-              "root_selector": "",
-              "source": "url",
-              "type": "json",
-              "url": "/api/metrics/sleep_analysis?from=${__from}&to=${__to}&source=${source:csv}",
-              "url_options": { "data": "", "method": "GET" }
-            }
-          ],
-          "title": "Sommeil Profond",
-          "type": "stat"
-        }
-      ],
+      "panels": [],
       "title": "Sommeil",
       "type": "row"
     },
     {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "blue", "mode": "shades" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "hue",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "lineWidth": 1,
+            "scaleDistribution": { "type": "linear" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "h"
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Eveille" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "orange", "mode": "fixed" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Leger" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "light-blue", "mode": "fixed" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "REM" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "purple", "mode": "fixed" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Profond" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "dark-blue", "mode": "fixed" } }]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 16, "x": 0, "y": 12 },
+      "id": 61,
+      "options": {
+        "barRadius": 0.1,
+        "barWidth": 0.8,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": { "calcs": ["mean"], "displayMode": "table", "placement": "bottom", "showLegend": true },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "normal",
+        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" },
+        "xTickLabelRotation": 0
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "awake", "text": "Eveille", "type": "number" },
+            { "selector": "core", "text": "Leger", "type": "number" },
+            { "selector": "rem", "text": "REM", "type": "number" },
+            { "selector": "deep", "text": "Profond", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/sleep_analysis?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Analyse du Sommeil",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 6 },
+              { "color": "green", "value": 7 }
+            ]
+          },
+          "unit": "h"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 12 },
+      "id": 62,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "inBed", "text": "Total", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/sleep_analysis?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Temps au lit",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
+            ]
+          },
+          "unit": "h"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 12 },
+      "id": 63,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "/^Profond$/", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "deep", "text": "Profond", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/sleep_analysis?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Sommeil Profond",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "green", "value": 1.5 }
+            ]
+          },
+          "unit": "h"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 16 },
+      "id": 64,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "/^REM$/", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "rem", "text": "REM", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/sleep_analysis?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Sommeil REM",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "orange", "value": 75 },
+              { "color": "yellow", "value": 85 },
+              { "color": "green", "value": 90 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 16 },
+      "id": 65,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "efficiency", "text": "Efficacite", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/sleep_analysis?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Efficacite Sommeil",
+      "type": "gauge"
+    },
+    {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 34 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 20 },
       "id": 70,
       "panels": [],
       "title": "Activite",
@@ -955,7 +706,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 35 },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 21 },
       "id": 71,
       "options": {
         "colorMode": "value",
@@ -1013,7 +764,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 35 },
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 21 },
       "id": 73,
       "options": {
         "minVizHeight": 75,
@@ -1067,7 +818,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 35 },
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 21 },
       "id": 74,
       "options": {
         "colorMode": "value",
@@ -1121,7 +872,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 35 },
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 21 },
       "id": 75,
       "options": {
         "colorMode": "value",
@@ -1184,7 +935,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 39 },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 25 },
       "id": 76,
       "options": {
         "legend": { "calcs": ["sum"], "displayMode": "table", "placement": "bottom", "showLegend": true },
@@ -1250,7 +1001,7 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 39 },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 25 },
       "id": 72,
       "options": {
         "legend": { "calcs": ["sum", "mean"], "displayMode": "table", "placement": "bottom", "showLegend": true },
@@ -1285,6 +1036,1401 @@
         }
       ],
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 33 },
+      "id": 80,
+      "panels": [],
+      "title": "Poids & Corps",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null }
+            ]
+          },
+          "unit": "masskg"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 34 },
+      "id": 81,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showPercentChange": true,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "Poids", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/weight_body_mass?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Poids actuel",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "max": 40,
+          "min": 15,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "yellow", "value": null },
+              { "color": "green", "value": 18.5 },
+              { "color": "orange", "value": 25 },
+              { "color": "red", "value": 30 }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 34 },
+      "id": 82,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "IMC", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/body_mass_index?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "IMC",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "max": 50,
+          "min": 5,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "super-light-green", "value": null },
+              { "color": "green", "value": 10 },
+              { "color": "yellow", "value": 20 },
+              { "color": "orange", "value": 25 },
+              { "color": "red", "value": 30 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 34 },
+      "id": 83,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showPercentChange": true,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "Graisse", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/body_fat_percentage?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "% Masse grasse",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null }
+            ]
+          },
+          "unit": "masskg"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 34 },
+      "id": 84,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showPercentChange": true,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "Masse maigre", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/lean_body_mass?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Masse maigre",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "kg",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 6,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "always",
+            "spanNulls": true,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "masskg"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 38 },
+      "id": 85,
+      "options": {
+        "legend": {
+          "calcs": ["lastNotNull", "min", "max"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "Poids", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/weight_body_mass?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Evolution du poids",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 46 },
+      "id": 90,
+      "panels": [],
+      "title": "Tension Arterielle",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 120 },
+              { "color": "orange", "value": 130 },
+              { "color": "red", "value": 140 }
+            ]
+          },
+          "unit": "mmHg"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 47 },
+      "id": 91,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "systolic", "text": "Systolique", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_pressure?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Systolique",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 80 },
+              { "color": "orange", "value": 85 },
+              { "color": "red", "value": 90 }
+            ]
+          },
+          "unit": "mmHg"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 47 },
+      "id": 92,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "diastolic", "text": "Diastolique", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_pressure?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Diastolique",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [
+            { "options": { "from": 0, "result": { "color": "green", "index": 0, "text": "Optimale" }, "to": 120 }, "type": "range" },
+            { "options": { "from": 120, "result": { "color": "yellow", "index": 1, "text": "Normale" }, "to": 130 }, "type": "range" },
+            { "options": { "from": 130, "result": { "color": "orange", "index": 2, "text": "Elevee" }, "to": 140 }, "type": "range" },
+            { "options": { "from": 140, "result": { "color": "red", "index": 3, "text": "Hypertension" }, "to": 200 }, "type": "range" }
+          ],
+          "max": 180,
+          "min": 80,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 120 },
+              { "color": "orange", "value": 130 },
+              { "color": "red", "value": 140 }
+            ]
+          },
+          "unit": "mmHg"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 12, "y": 47 },
+      "id": 93,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "systolic", "text": "Systolique", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_pressure?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Classification",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "purple", "value": null }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 18, "y": 47 },
+      "id": 94,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["count"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "systolic", "text": "Systolique", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_pressure?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Mesures",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "mmHg",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 6,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "always",
+            "spanNulls": true,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "line+area" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "transparent", "value": null },
+              { "color": "red", "value": 140 }
+            ]
+          },
+          "unit": "mmHg"
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Systolique" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Diastolique" },
+            "properties": [{ "id": "color", "value": { "fixedColor": "blue", "mode": "fixed" } }]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 51 },
+      "id": 95,
+      "options": {
+        "legend": {
+          "calcs": ["lastNotNull", "mean", "min", "max"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "systolic", "text": "Systolique", "type": "number" },
+            { "selector": "diastolic", "text": "Diastolique", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_pressure?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Evolution de la tension",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 59 },
+      "id": 110,
+      "panels": [],
+      "title": "Respiration & Oxygene",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "max": 100,
+          "min": 85,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "orange", "value": 90 },
+              { "color": "yellow", "value": 94 },
+              { "color": "green", "value": 96 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 60 },
+      "id": 111,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["mean"], "fields": "", "values": false },
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "SpO2", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_oxygen_saturation?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "SpO2 Moyen",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "yellow", "value": null },
+              { "color": "green", "value": 12 },
+              { "color": "yellow", "value": 20 },
+              { "color": "orange", "value": 25 }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 60 },
+      "id": 112,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["mean"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "Freq resp", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/respiratory_rate?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Freq. Respiratoire (resp/min)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 95 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 60 },
+      "id": 113,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["min"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "SpO2", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_oxygen_saturation?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "SpO2 Min",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 60 },
+      "id": 114,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["max"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "SpO2", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_oxygen_saturation?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "SpO2 Max",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "line" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "transparent", "value": 95 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 64 },
+      "id": 115,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "min", "max"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "SpO2", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/blood_oxygen_saturation?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Evolution SpO2",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "resp/min",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 64 },
+      "id": 116,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "min", "max"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "Freq. Resp.", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/respiratory_rate?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Evolution Frequence Respiratoire",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 72 },
+      "id": 120,
+      "panels": [],
+      "title": "Performance",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "orange", "value": 30 },
+              { "color": "yellow", "value": 40 },
+              { "color": "green", "value": 50 },
+              { "color": "super-light-green", "value": 60 }
+            ]
+          },
+          "unit": "ml/kg/min"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 73 },
+      "id": 121,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showPercentChange": true,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "VO2 Max", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/vo2max?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "VO2 Max",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "super-light-green", "value": null },
+              { "color": "green", "value": 50 },
+              { "color": "yellow", "value": 60 },
+              { "color": "orange", "value": 70 },
+              { "color": "red", "value": 80 }
+            ]
+          },
+          "unit": "bpm"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 73 },
+      "id": 122,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["mean"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "FC Repos", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/resting_heart_rate?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "FC Repos Moyenne",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "orange", "value": 20 },
+              { "color": "yellow", "value": 40 },
+              { "color": "green", "value": 60 },
+              { "color": "super-light-green", "value": 100 }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 73 },
+      "id": 123,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["mean"], "fields": "", "values": false },
+        "showPercentChange": false,
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "HRV", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/heart_rate_variability?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "HRV Moyen (SDNN)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 6,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "always",
+            "spanNulls": true,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "ml/kg/min"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 77 },
+      "id": 124,
+      "options": {
+        "legend": {
+          "calcs": ["lastNotNull", "mean"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "VO2 Max", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/vo2max?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Evolution VO2 Max",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "BPM",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "bpm"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 77 },
+      "id": 125,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "min", "max"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "FC Repos", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/resting_heart_rate?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Evolution FC Repos",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "${DS_INFINITY}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "ms",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 77 },
+      "id": 126,
+      "options": {
+        "legend": {
+          "calcs": ["mean", "min", "max"],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": { "hideZeros": false, "mode": "multi", "sort": "none" }
+      },
+      "targets": [
+        {
+          "columns": [
+            { "selector": "date", "text": "Date", "type": "timestamp" },
+            { "selector": "qty", "text": "HRV", "type": "number" }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "${DS_INFINITY}"
+          },
+          "filters": [],
+          "format": "table",
+          "refId": "A",
+          "root_selector": "",
+          "source": "url",
+          "type": "json",
+          "url": "/api/metrics/heart_rate_variability?from=${__from}&to=${__to}&source=${source:csv}",
+          "url_options": { "data": "", "method": "GET" }
+        }
+      ],
+      "title": "Evolution HRV",
+      "type": "timeseries"
     }
   ],
   "preload": false,
@@ -1316,37 +2462,6 @@
             "source": "url",
             "type": "json",
             "url": "/api/metrics/sources",
-            "url_options": { "data": "", "method": "GET" }
-          },
-          "queryType": "infinity"
-        },
-        "refresh": 1,
-        "regex": "",
-        "type": "query"
-      },
-      {
-        "current": {},
-        "datasource": {
-          "type": "yesoreyeram-infinity-datasource",
-          "uid": "${DS_INFINITY}"
-        },
-        "definition": "",
-        "description": "Type de metrique a afficher",
-        "includeAll": true,
-        "label": "Metrique",
-        "multi": true,
-        "name": "metric",
-        "options": [],
-        "query": {
-          "infinityQuery": {
-            "columns": [],
-            "filters": [],
-            "format": "table",
-            "refId": "variable",
-            "root_selector": "metrics",
-            "source": "url",
-            "type": "json",
-            "url": "/api/metrics/available",
             "url_options": { "data": "", "method": "GET" }
           },
           "queryType": "infinity"
