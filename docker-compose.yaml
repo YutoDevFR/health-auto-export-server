@@ -30,6 +30,7 @@ services:
     environment:
       - GF_SERVER_ROOT_URL=${GRAFANA_ROOT_URL}
       - GF_SERVER_SERVE_FROM_SUB_PATH=false
+      - GF_SECURITY_ALLOW_EMBEDDING=true
 
   hae-server:
     container_name: hae-server
