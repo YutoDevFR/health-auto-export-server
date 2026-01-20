@@ -21,7 +21,7 @@ services:
       - 3000:3000
     volumes:
       - grafana-data:/var/lib/grafana
-    user: "0:0" # needed for permission issues on Coolify/Ubuntu
+    user: "0:0"
     restart: unless-stopped
     networks:
       - hae_network
@@ -52,6 +52,19 @@ services:
     networks:
       - hae_network
     restart: unless-stopped
+
+  hae-nginx:
+    container_name: hae-nginx
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - hae-grafana
+    networks:
+      - hae_network
 
 networks:
   hae_network:
