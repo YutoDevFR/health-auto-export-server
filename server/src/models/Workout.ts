@@ -116,7 +116,7 @@ const WorkoutSchema = new Schema(
     // --- Optional fields ---
     activeEnergyBurned: {
       type: QuantityMetricSchema,
-      required: true,
+      required: false,
     },
     distance: {
       type: QuantityMetricSchema,
