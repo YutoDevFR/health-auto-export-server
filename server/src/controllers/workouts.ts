@@ -163,7 +163,11 @@ export const saveWorkouts = async (ingestData: IngestData): Promise<IngestRespon
     const response: IngestResponse = {};
     const workouts = ingestData.data.workouts;
 
+    console.log(`[Workouts] Received ${workouts?.length ?? 0} workouts`);
+    console.log(`[Workouts] Workout IDs:`, workouts?.map((w) => ({ id: w.id, name: w.name, start: w.start })));
+
     if (!workouts || !workouts.length) {
+      console.log('[Workouts] No workout data provided');
       response.workouts = {
         success: true,
         message: 'No workout data provided',
@@ -196,10 +200,17 @@ export const saveWorkouts = async (ingestData: IngestData): Promise<IngestRespon
         },
       }));
 
-    await Promise.all([
+    const [workoutResult] = await Promise.all([
       WorkoutModel.bulkWrite(workoutOperations),
       routeOperations.length > 0 ? RouteModel.bulkWrite(routeOperations) : Promise.resolve(),
     ]);
+
+    console.log(`[Workouts] BulkWrite result:`, {
+      insertedCount: workoutResult.insertedCount,
+      modifiedCount: workoutResult.modifiedCount,
+      upsertedCount: workoutResult.upsertedCount,
+      matchedCount: workoutResult.matchedCount,
+    });
 
     response.workouts = {
       success: true,
